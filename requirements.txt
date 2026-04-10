@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+sqlalchemy
+asyncpg
+psycopg2-binary
+pydantic
+python-dotenv
+qrcode
+pillow
+numpy
+opencv-python
+onnxruntime
+insightface
+greenlet

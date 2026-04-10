@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      background-color: #121212;
+      color: white;
+      font-family: sans-serif;
+      padding: 20px;
+    }
+    h1 {
+      color: #00ffcc;
+    }
+  </style>
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+</head>
+<body>
+  <h1>UWSD Live Dashboard</h1>
+  <ul id="alerts" style="font-size:20px;"></ul>
+
+  <script>
+    const socket = io("http://localhost:4000");
+
+    socket.on("alert", (data) => {
+      const li = document.createElement("li");
+
+      let color = data.status === "GREEN" ? "green" :
+                  data.status === "YELLOW" ? "orange" : "red";
+
+      li.innerHTML = `<b style="color:${color}">
+        ${data.status} | ${data.identity || "Unknown"} | ${data.confidence ? data.confidence.toFixed(2) : 0}
+      </b>`;
+
+      document.getElementById("alerts").prepend(li);
+    });
+  </script>
+</body>
+</html>
